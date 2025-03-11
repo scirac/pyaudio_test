@@ -10,7 +10,7 @@ CHANNELS = 8
 
 RECORD_SECONDS = 20
 
-wf = wave.open('record.wav','wb')
+wf = wave.open(f'record_{CHANNELS}ch.wav','wb')
 wf.setnchannels(CHANNELS)
 wf.setsampwidth(2)
 wf.setframerate(SAMPLE_RATE)
@@ -23,7 +23,7 @@ try:
                     input=True,
                     )
 
-    print(f'Recording: sample_rate:{SAMPLE_RATE}, channels:{CHANNELS}, time:{RECORD_SECONDS}s')
+    print(f'Recording: sample_rate:{SAMPLE_RATE}, channels:{CHANNELS},format:{FORMAT} time:{RECORD_SECONDS}s')
     for _ in range(0, SAMPLE_RATE // CHUNK * RECORD_SECONDS):
         data = stream.read(CHUNK)
         wf.writeframes(data)
